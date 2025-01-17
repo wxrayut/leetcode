@@ -5,97 +5,38 @@
 #include <stdbool.h>
 
 
-#define MAX_SIZE 100
+bool isBracket(char opening, char closing) {
 
-
-typedef struct {
-    int index;
-    char brackets[MAX_SIZE];
-} Stack;
-
-
-Stack *create_stack() {
-    
-    Stack *stack = (Stack *)malloc(sizeof(Stack));
-
-    stack->index = -1;
-
-    return stack;
-}
-
-
-void free_stack(Stack *stack) {
-
-    if (stack == NULL) {
-        return;
-    }
-
-    free(stack);
-}
-
-
-bool isEmpty(Stack *stack) {
-
-    return stack->index < 0;
-}
-
-
-void push(Stack *stack, char value) {
-    
-    if (stack->index >= MAX_SIZE - 1) {
-        return;
-    }
-
-    stack->index++;
-    stack->brackets[stack->index] = value;
-}
-
-
-char pop(Stack *stack) {
-    
-    if (isEmpty(stack)) {
-        return '\0';
-    }
-
-    return stack->brackets[stack->index--];
-}
-
-
-bool isBracket(char open, char close) {
-
-    switch (open) {
+    switch (opening) {
         case '(':
-            return close == ')';
+            return closing == ')';
         case '[':
-            return close == ']';
+            return closing == ']';
         case '{':
-            return close == '}';
+            return closing == '}';
     }
 
     return false;
 }
 
 
-bool solve(char *s) {
-    
-    Stack *stack = create_stack();
+bool isValid(char *string) {
 
-    for (int i = 0; i < strlen(s); i++) {
-        if (s[i] == '(' || 
-            s[i] == '[' || 
-            s[i] == '{') {
-            push(stack, s[i]);
+    int i = -1;
+    char brackets[128];
+
+    for (int j = 0; j < strlen(string); j++) {
+        char bracket = string[j];
+        if (bracket == '(' || bracket == '[' || bracket == '{') {
+            brackets[++i] = bracket;
         } else {
-            if (!isBracket(pop(stack), s[i])) {
-                free_stack(stack);
+            if (!isBracket(brackets[i--], bracket)) {
                 return false;
             }
         }
     }
 
-    free_stack(stack);
-
-    return true;
+    return i == -1;
 }
 
 
@@ -208,7 +149,7 @@ int main() {
 
     for (int i = 0; i < size; i++) {
         char *s = brackets[i];
-        printf("Case #%d: %s\n", i, solve(s) ? "Valid" : "Invalid");
+        printf("Case #%d: %s\n", i, isValid(s) ? "Valid" : "Invalid");
     }
 
     return EXIT_SUCCESS;
