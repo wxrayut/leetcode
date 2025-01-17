@@ -20,7 +20,7 @@ cd ./leetcode
 Use the provided Makefile to compile and run a specific solution:
 
 ```bash
-make run file=solutions/<problem>.c
+make run file=solutions/<problem[.c, .py]>
 ```
 
 #### Check for Memory Leaks
@@ -45,7 +45,7 @@ make leak-check file=solutions/<problem>.c
 
 ## 🛠 Tools Used
 
-- C Compiler: gcc
+- C Compiler: `gcc`
 - Valgrind: For memory leak checks.
 - Makefile: Simplified build process.
 
