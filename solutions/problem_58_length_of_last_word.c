@@ -18,29 +18,13 @@ int length_of_last_word(char *s) {
         return 0;
     }
 
-    int i = 0;
+    int i = len - 1;
 
-    while (i < len) {
-    
-        while (isspace(s[i])) {
-            i++;
-        }
-        
-        int start = i;
-
-        while (isalnum(s[i])) {
-            i++;
-        }
-
-        if (len == start + (i - start)) {
-            // Length of last word.
-            return i - start;
-        }
-
-        i++;
+    while (i >= 0 && isalnum(s[i])) {
+        i--;
     }
 
-    return 0;
+    return len - 1 - i;
 }
 
 
