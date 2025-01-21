@@ -11,7 +11,7 @@ def count_of_atoms(formula: str) -> str:
             stack.append({})
         elif formula[i] == ")":
             i += 1
-            atoms = stack.pop()
+            elements = stack.pop()
     
             multiplier = 1
     
@@ -23,8 +23,8 @@ def count_of_atoms(formula: str) -> str:
                     i += 1
                 multiplier = int(formula[start:i])
             # Update the counts with the multiplied values.
-            for atom, num in atoms.items():
-                stack[-1][atom] = stack[-1].get(atom, 0) + num * multiplier
+            for element, num in elements.items():
+                stack[-1][element] = stack[-1].get(element, 0) + num * multiplier
         else:
             # Parse an atom and its count.
             start = i
@@ -33,7 +33,7 @@ def count_of_atoms(formula: str) -> str:
     
             while i < len(formula) and formula[i].islower():
                 i += 1
-            atom = formula[start:i]
+            element = formula[start:i]
     
             # Parse the count of the atom (if any).
             num = 0
@@ -44,17 +44,17 @@ def count_of_atoms(formula: str) -> str:
             num = max(num, 1)
     
             # Add the atom and its count to the current dictionary.
-            if atom in stack[-1]:
-                stack[-1][atom] += num
+            if element in stack[-1]:
+                stack[-1][element] += num
             else:
-                stack[-1][atom] = num
+                stack[-1][element] = num
 
-    atoms = stack[0]   
+    elements = stack[0]   
     result = []
 
-    for atom in sorted(atoms.keys()):
-        num = atoms[atom]
-        result.append(atom + (str(num) if num > 1 else ""))
+    for element in sorted(elements.keys()):
+        num = elements[element]
+        result.append(element + (str(num) if num > 1 else ""))
 
     return "".join(result)
     
