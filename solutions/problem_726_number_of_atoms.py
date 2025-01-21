@@ -26,7 +26,7 @@ def count_of_atoms(formula: str) -> str:
             for element, num in elements.items():
                 stack[-1][element] = stack[-1].get(element, 0) + num * multiplier
         else:
-            # Parse an atom and its count.
+            # Parse an element and its count.
             start = i
             # Move to the next character after the uppercase letter.
             i += 1
@@ -35,7 +35,7 @@ def count_of_atoms(formula: str) -> str:
                 i += 1
             element = formula[start:i]
     
-            # Parse the count of the atom (if any).
+            # Parse the count of the element (if any).
             num = 0
     
             while i < len(formula) and formula[i].isdigit():
@@ -43,7 +43,7 @@ def count_of_atoms(formula: str) -> str:
                 i += 1
             num = max(num, 1)
     
-            # Add the atom and its count to the current dictionary.
+            # Add the element and its count to the current dictionary.
             if element in stack[-1]:
                 stack[-1][element] += num
             else:
