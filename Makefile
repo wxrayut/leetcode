@@ -17,7 +17,7 @@
 U_NAME = $(shell uname -s)
 
 CC = gcc
-CFLAGS = 
+CFLAGS = -Wall -Wextra
 
 INCLUDE_DIR = 
 STRUCTURE_DIR = 
