@@ -12,7 +12,7 @@
 # 
 # Example:
 # 	make run file=solution.c
-# 	make leak-check file=solution.ca
+# 	make leak-check file=solution.c
 
 U_NAME = $(shell uname -s)
 
